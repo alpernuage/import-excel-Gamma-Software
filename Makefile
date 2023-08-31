@@ -116,8 +116,8 @@ test: ## Run tests
 ## —— 🛠️ Others ——
 .PHONY: open
 open: ## Open the project in the browser
-	@echo "${GREEN}Opening https://$(SERVER_NAME)"
-	@open https://$(SERVER_NAME)
+	@echo "${GREEN}Opening https://$(SERVER_NAME)/excel/import"
+	@open https://$(SERVER_NAME)/excel/import
 
 .DEFAULT_GOAL := help
 .PHONY: help
