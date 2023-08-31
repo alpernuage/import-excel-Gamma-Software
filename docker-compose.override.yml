@@ -1,14 +1,27 @@
-version: '3'
+version: '3.8'
 
 services:
 ###> doctrine/doctrine-bundle ###
   database:
     ports:
-      - "5432"
+      - "5432:5432"
 ###< doctrine/doctrine-bundle ###
 
-###> symfony/mailer ###
-  mailer:
-    image: schickling/mailcatcher
-    ports: ["1025", "1080"]
-###< symfony/mailer ###
+  caddy:
+    ports:
+      # HTTP
+      - target: 80
+        published: 80
+        protocol: tcp
+      # HTTPS
+      - target: 443
+        published: 443
+        protocol: tcp
+      # HTTP/3
+      - target: 443
+        published: 443
+        protocol: udp
+
+  php:
+    ports:
+      - 9000:9000
