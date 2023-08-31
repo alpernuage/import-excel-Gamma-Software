@@ -117,7 +117,7 @@ test: ## Run tests
 .PHONY: open
 open: ## Open the project in the browser
 	@echo "${GREEN}Opening https://$(SERVER_NAME)"
-	@open https://$(SERVER_NAME)/move
+	@open https://$(SERVER_NAME)
 
 .DEFAULT_GOAL := help
 .PHONY: help
