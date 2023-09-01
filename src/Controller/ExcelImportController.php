@@ -16,7 +16,7 @@ class ExcelImportController extends AbstractController
         /** @var UploadedFile $uploadedFile */
         $uploadedFile = $request->files->get('excel_file');
         $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
-        $uploadedFile->move($destination);
+        $uploadedFile->move($destination, $uploadedFile->getClientOriginalName());
 
         return $this->render('excel_import/index.html.twig', [
             'controller_name' => 'ExcelImportController',
