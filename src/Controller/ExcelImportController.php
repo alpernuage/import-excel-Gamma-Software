@@ -16,11 +16,12 @@ class ExcelImportController extends AbstractController
         /** @var UploadedFile $uploadedFile */
         $uploadedFile = $request->files->get('excel_file');
         $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
-        $uploadedFile->move($destination, $uploadedFile->getClientOriginalName());
+        $newFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $extension = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_EXTENSION);
+        $uploadedFile->move($destination, $newFilename . '-' . uniqid() . '.' . $extension);
 
         return $this->render('excel_import/index.html.twig', [
             'controller_name' => 'ExcelImportController',
         ]);
     }
 }
-
