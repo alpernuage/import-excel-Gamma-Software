@@ -14,4 +14,11 @@
             <button type="submit">Import</button>
         </form>
     </div>
+
+    {% for flashMessage in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
 {% endblock %}
