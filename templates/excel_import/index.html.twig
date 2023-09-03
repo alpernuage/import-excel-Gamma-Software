@@ -3,23 +3,8 @@
 {% block title %}Liste des Groupes{% endblock %}
 
 {% block body %}
-    <div>
-        <h2>Import Excel Data</h2>
-
-        <form method="POST" enctype="multipart/form-data" action="{{ path('app_excel_import') }}">
-            <div>
-                <label for="excel_file">Select Excel File:</label>
-                <input type="file" id="excel_file" name="excel_file" accept=".xlsx, .xls">
-            </div>
-            <button type="submit">Import</button>
-        </form>
-    </div>
-
-    {% for flashMessage in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
+    {% include '_layout/import.html.twig' %}
+    {% include '_layout/flash_messages.html.twig' %}
 
     <br>
     <a href="{{ path('app_create') }}" class="btn btn-primary">Créer un groupe</a>
