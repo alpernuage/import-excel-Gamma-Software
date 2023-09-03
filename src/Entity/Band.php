@@ -38,7 +38,7 @@ class Band
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $musicalCurrent = null;
 
-    #[ORM\Column(type: Types::STRING, length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private string $presentation = "";
 
     public function getId(): int
