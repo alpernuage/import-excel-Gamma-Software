@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BandRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BandRepository::class)]
 class Band
@@ -15,18 +16,26 @@ class Band
     private int $id;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private string $name = "";
 
     #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private string $origin = "";
 
     #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private string $city = "";
 
     #[ORM\Column(type: Types::INTEGER)]
+    #[Assert\Range(min: 1900, max: 2100)]
     private int $startYear;
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[Assert\Range(min: 1900, max: 2100)]
     private ?int $separationYear = null;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
@@ -36,9 +45,11 @@ class Band
     private ?int $members = null;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    #[Assert\Length(max: 255)]
     private ?string $musicalCurrent = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
     private string $presentation = "";
 
     public function getId(): int
