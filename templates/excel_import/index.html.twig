@@ -41,17 +41,9 @@
                 <td>{{ band.origin }}</td>
                 <td>{{ band.city }}</td>
                 <td>{{ band.startYear }}</td>
-                <td>
-                    {% if band.separationYear is not null and band.separationYear != 0 %}
-                        {{ band.separationYear }}
-                    {% endif %}
-                </td>
+                <td>{{ band.separationYear }}</td>
                 <td>{{ band.founders }}</td>
-                <td>
-                    {% if band.members is not null and band.members != 0 %}
-                        {{ band.members }}
-                    {% endif %}
-                </td>
+                <td>{{ band.members }}</td>
                 <td>{{ band.musicalCurrent }}</td>
                 <td>{{ band.presentation }}</td>
             </tr>
