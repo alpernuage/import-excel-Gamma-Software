@@ -51,6 +51,28 @@ class ExcelImportController extends AbstractController
         ]);
     }
 
+    #[Route('/edit', name: 'app_edit', methods: [Request::METHOD_GET, Request::METHOD_POST])]
+    public function edit(Request $request, BandRepository $bandRepository): Response
+    {
+        $band = $bandRepository->find($request->get('id'));
+        $form = $this->createForm(BandType::class, $band);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $band = $form->getData();
+            $this->entityManager->persist($band);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Band updated successfully!');
+
+            return $this->redirectToRoute('app_bands');
+        }
+
+        return $this->render('excel_import/edit.html.twig', [
+            'edit_band_form' => $form,
+        ]);
+    }
+
     #[Route('/import', name: 'app_excel_import', methods: [Request::METHOD_POST])]
     public function import(Request $request): Response
     {

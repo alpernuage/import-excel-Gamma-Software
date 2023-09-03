@@ -45,7 +45,7 @@
         {% for band in bands %}
             <tr>
                 <td>
-                    {#                    <a href="{{ path('app_edit', { 'id': band.id }) }}" class="btn btn-primary">Modifier</a> #}
+                    <a href="{{ path('app_edit', { 'id': band.id }) }}" class="btn btn-primary">Modifier</a>
                     {#                    <a href="{{ path('app_delete', { 'id': band.id }) }}" class="btn btn-danger">Supprimer</a> #}
                 </td>
                 <td>{{ band.name }}</td>
@@ -60,7 +60,7 @@
             </tr>
         {% else %}
             <tr>
-                <p>Aucun data trouvé</p>
+                <td>Aucun data trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
