@@ -30,11 +30,11 @@
         {% for band in bands %}
             <tr>
                 <td>
-                    <a href="{{ path('app_edit', { 'id': band.id }) }}" class="btn btn-primary">Modifier</a>
+                    <a href="{{ path('app_edit', { 'id': band.id }) }}" class="btn btn-primary">✏️ Modifier</a>
                     <form action="{{ path('app_delete', {'id': band.id}) }}" method="POST"
                           onsubmit="return confirm('Êtes-vous sûr de supprimer ce groupe?');">
                         <input type="hidden" name="token" value="{{ csrf_token('delete-band') }}"/>
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                        <button type="submit" class="btn btn-danger">🗑️ Supprimer</button>
                     </form>
                 </td>
                 <td>{{ band.name }}</td>
