@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 class ExcelImportController extends AbstractController
 {
@@ -71,6 +72,24 @@ class ExcelImportController extends AbstractController
         return $this->render('excel_import/edit.html.twig', [
             'edit_band_form' => $form,
         ]);
+    }
+
+    #[Route('/delete', name: 'app_delete', methods: [Request::METHOD_POST])]
+    public function delete(Request $request, BandRepository $bandRepository): Response
+    {
+        $token = $request->request->get('token', "");
+
+        if (!$this->isCsrfTokenValid('delete-band', $token)) {
+            throw new InvalidCsrfTokenException("Invalid CSRF token.");
+        }
+
+        $band = $bandRepository->find($request->get('id'));
+        $this->entityManager->remove($band);
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'Band deleted successfully!');
+
+        return $this->redirectToRoute('app_bands');
     }
 
     #[Route('/import', name: 'app_excel_import', methods: [Request::METHOD_POST])]
