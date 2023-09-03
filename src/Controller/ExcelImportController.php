@@ -113,8 +113,11 @@ class ExcelImportController extends AbstractController
                 return $this->redirectToRoute('app_bands');
             } catch
             (FileException $e) {
-                dd($e);
+                $this->addFlash('error', 'Une erreur est survenue lors de l\'importation du fichier: ' . $e->getMessage());
+
+                return $this->redirectToRoute('app_bands');
             }
+
         }
 
         return $this->render('excel_import/index.html.twig', [
