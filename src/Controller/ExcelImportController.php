@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Band;
+use App\Form\BandType;
 use App\Repository\BandRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -26,6 +27,27 @@ class ExcelImportController extends AbstractController
 
         return $this->render('excel_import/index.html.twig', [
             'bands' => $bands,
+        ]);
+    }
+
+    #[Route('/create', name: 'app_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
+    public function create(Request $request): Response
+    {
+        $form = $this->createForm(BandType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $band = $form->getData();
+            $this->entityManager->persist($band);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Band created successfully!');
+
+            return $this->redirectToRoute('app_bands');
+        }
+
+        return $this->render('excel_import/create.html.twig', [
+            'create_band_form' => $form,
         ]);
     }
 

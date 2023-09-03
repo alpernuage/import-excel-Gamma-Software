@@ -21,11 +21,15 @@
         </div>
     {% endfor %}
 
+    <br>
+    <a href="{{ path('app_create') }}" class="btn btn-primary">Créer un groupe</a>
+
     <h1>Liste des Groupes</h1>
 
     <table class="table">
         <thead>
         <tr>
+            <th>Actions</th>
             <th>Nom du Groupe</th>
             <th>Origine</th>
             <th>Ville</th>
@@ -40,6 +44,10 @@
         <tbody>
         {% for band in bands %}
             <tr>
+                <td>
+                    {#                    <a href="{{ path('app_edit', { 'id': band.id }) }}" class="btn btn-primary">Modifier</a> #}
+                    {#                    <a href="{{ path('app_delete', { 'id': band.id }) }}" class="btn btn-danger">Supprimer</a> #}
+                </td>
                 <td>{{ band.name }}</td>
                 <td>{{ band.origin }}</td>
                 <td>{{ band.city }}</td>
