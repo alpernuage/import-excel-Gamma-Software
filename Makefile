@@ -108,6 +108,21 @@ reset: kill down build start
 cache: ## 🧹 Clear Symfony cache
 	$(CONSOLE) cache:clear
 
+## —— 🗄️ Database ——
+.PHONY: migration
+migration: ## 🔀 Generate a new Doctrine migration
+	$(CONSOLE) doctrine:migrations:diff --formatted
+
+.PHONY: migrate
+migrate: ## Run migrations
+	$(CONSOLE) doctrine:migration:migrate --no-interaction
+
+.PHONY: database
+database: ## 📊 Create and migrate the database schema
+	$(CONSOLE) doctrine:database:drop --force || true
+	$(CONSOLE) doctrine:database:create
+	$(CONSOLE) doctrine:migrations:migrate -n
+
 ## —— ✅ Testing ——
 .PHONY: test
 test: ## Run tests
