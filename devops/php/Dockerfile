@@ -51,6 +51,15 @@ RUN set -eux; \
 	\
 	apk del .build-deps
 
+RUN apk add --no-cache \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    && docker-php-ext-configure gd \
+    --with-freetype \
+    --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
+
 ARG ENV
 COPY ./devops/php/conf.d/php.${ENV}.ini $PHP_INI_DIR/conf.d/php.ini
 
