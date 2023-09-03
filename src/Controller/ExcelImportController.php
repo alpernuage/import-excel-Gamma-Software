@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Band;
+use App\Repository\BandRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +19,17 @@ class ExcelImportController extends AbstractController
     {
     }
 
-    #[Route('/excel/import', name: 'app_excel_import')]
+    #[Route('/index', name: 'app_bands', methods: [Request::METHOD_GET])]
+    public function index(BandRepository $bandRepository): Response
+    {
+        $bands = $bandRepository->findAll();
+
+        return $this->render('excel_import/index.html.twig', [
+            'bands' => $bands,
+        ]);
+    }
+
+    #[Route('/import', name: 'app_excel_import', methods: [Request::METHOD_POST])]
     public function import(Request $request): Response
     {
         if ($request->isMethod('POST')) {
@@ -54,14 +65,14 @@ class ExcelImportController extends AbstractController
 
                 $this->addFlash('success', 'L\'importation du fichier Excel a été effectuée avec succès.');
 
-                return $this->redirectToRoute('app_excel_import');
+                return $this->redirectToRoute('app_bands');
             } catch
             (FileException $e) {
                 dd($e);
             }
         }
 
-        return $this->render('excel_import/import.html.twig', [
+        return $this->render('excel_import/index.html.twig', [
             'controller_name' => 'ExcelImportController',
         ]);
     }

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Groupes{% endblock %}
+
+{% block body %}
+    <div>
+        <h2>Import Excel Data</h2>
+
+        <form method="POST" enctype="multipart/form-data" action="{{ path('app_excel_import') }}">
+            <div>
+                <label for="excel_file">Select Excel File:</label>
+                <input type="file" id="excel_file" name="excel_file" accept=".xlsx, .xls">
+            </div>
+            <button type="submit">Import</button>
+        </form>
+    </div>
+
+    {% for flashMessage in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <h1>Liste des Groupes</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom du Groupe</th>
+            <th>Origine</th>
+            <th>Ville</th>
+            <th>Année de Début</th>
+            <th>Année de Séparation</th>
+            <th>Fondateurs</th>
+            <th>Membres</th>
+            <th>Courant Musical</th>
+            <th>Présentation</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for band in bands %}
+            <tr>
+                <td>{{ band.name }}</td>
+                <td>{{ band.origin }}</td>
+                <td>{{ band.city }}</td>
+                <td>{{ band.startYear }}</td>
+                <td>{{ band.separationYear }}</td>
+                <td>{{ band.founders }}</td>
+                <td>{{ band.members }}</td>
+                <td>{{ band.musicalCurrent }}</td>
+                <td>{{ band.presentation }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <p>Aucun data trouvé</p>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
