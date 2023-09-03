@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ExcelImportController extends AbstractController
 {
     #[Route('/excel/import', name: 'app_excel_import')]
-    public function index(Request $request): Response
+    public function import(Request $request): Response
     {
         if ($request->isMethod('POST')) {
             /** @var UploadedFile $uploadedFile */
@@ -25,7 +25,7 @@ class ExcelImportController extends AbstractController
             return $this->redirectToRoute('app_excel_import');
         }
 
-        return $this->render('excel_import/index.html.twig', [
+        return $this->render('excel_import/import.html.twig', [
             'controller_name' => 'ExcelImportController',
         ]);
     }
