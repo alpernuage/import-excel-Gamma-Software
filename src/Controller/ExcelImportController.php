@@ -120,10 +120,10 @@ class ExcelImportController extends AbstractController
                     $band->setName($row['A']);
                     $band->setOrigin($row['B']);
                     $band->setCity($row['C']);
-                    $band->setStartYear((int)$row['D']);
-                    $band->setSeparationYear((int)$row['E']);
+                    $band->setStartYear($row['D']);
+                    $band->setSeparationYear($row['E']);
                     $band->setFounders($row['F']);
-                    $band->setMembers((int)$row['G']);
+                    $band->setMembers($row['G']);
                     $band->setMusicalCurrent($row['H']);
                     $band->setPresentation($row['I']);
 
