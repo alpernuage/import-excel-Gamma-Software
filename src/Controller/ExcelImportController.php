@@ -98,6 +98,12 @@ class ExcelImportController extends AbstractController
         if ($request->isMethod('POST')) {
             /** @var UploadedFile $uploadedFile */
             $uploadedFile = $request->files->get('excel_file');
+
+            if ($uploadedFile === null) {
+                $this->addFlash('error', 'Veuillez sélectionner un fichier Excel à importer.');
+                return $this->redirectToRoute('app_bands');
+            }
+
             $destination = $this->getParameter('kernel.project_dir') . '/public/uploads/';
             $newFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
             $extension = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_EXTENSION);

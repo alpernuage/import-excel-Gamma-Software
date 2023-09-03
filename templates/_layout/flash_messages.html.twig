@@ -4,4 +4,9 @@
             {{ flashMessage }}
         </div>
     {% endfor %}
+    {% for flashMessage in app.flashes('error') %}
+        <div class="alert alert-error">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
 </section>
