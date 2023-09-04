@@ -28,3 +28,4 @@ git clone git@github.com:alpernuage/import-excel-Gamma-Software.git
 - Create a database with connexion parameters in `.env` file
 - Then just run `make install` command and follow instructions.
   Run `make help` to display available commands.
+- See `band.sql` file to inspect sql dump of the imported file
