@@ -48,7 +48,7 @@ vendor: .env.local
 
 .PHONY: install
 install: ## 🚀 Project installation
-install: .env.local ssl build start vendor open
+install: .env.local build start vendor open
 	@echo "${BLUE}The application is available at the url: $(SERVER_NAME)$(RESET)";
 
 ## —— 🖥️ Console ——
