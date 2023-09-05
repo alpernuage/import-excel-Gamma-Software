@@ -1,4 +1,4 @@
-[![Symfony_6.3](https://img.shields.io/badge/Symfony-6-blue.svg)](https://symfony.com/)
+[![Symfony_6.3](https://img.shields.io/badge/Symfony-6.3-blue.svg)](https://symfony.com/)
 [![PHP 8.2](https://img.shields.io/badge/PHP-8.2-purple.svg)](https://www.php.net/)
 [![Docker](https://img.shields.io/badge/Docker-blue.svg)](https://www.docker.com/)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-blue.svg)
@@ -29,3 +29,8 @@ git clone git@github.com:alpernuage/import-excel-Gamma-Software.git
 - Then just run `make install` command and follow instructions.
   Run `make help` to display available commands.
 - See `band.sql` file to inspect sql dump of the imported file
+
+**For Windows Users:**
+- Make sure you are using the WSL (Windows Subsystem for Linux) terminal for running `make` commands.
+- If `make` is not already installed, you can install it by following the instructions in this [guide](https://earthly.dev/blog/makefiles-on-windows/).
+- Optionally, you may install `mkcert` if you want to generate TLS certificates for your local development environment. You can install it using a package manager like `choco`.
